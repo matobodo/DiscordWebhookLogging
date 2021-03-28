@@ -1,6 +1,6 @@
 import atexit
 import logging
-from asyncio import Semaphore
+from threading import Semaphore
 from time import sleep
 
 import requests
