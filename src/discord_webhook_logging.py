@@ -1,6 +1,6 @@
 import atexit
 import logging
-from asyncio import Semaphore
+from threading import Semaphore
 from time import sleep
 
 import requests
@@ -86,11 +86,13 @@ class DiscordWebhookFormatter(logging.Formatter):
 
 class DiscordWebhookHandler(logging.Handler):
 
-    def __init__(self, webhook_url: str):
+    def __init__(self, webhook_url: str, auto_flush=False):
         super().__init__()
         self.webhook_url = webhook_url
         self.formatter: DiscordWebhookFormatter = DiscordWebhookFormatter()
         self._lock = Semaphore(5)
+
+        self.auto_flush = auto_flush
 
         # buffer for storing shorter logs and sending them in larger batches
         self.buffer = []
@@ -126,6 +128,9 @@ class DiscordWebhookHandler(logging.Handler):
                 # buffered messasge + new message fits info buffer, append it
                 self.buffer.append((record, formatted_lines))
                 self.buffer_message_len += formatted_lines_len + 1
+
+            if self.auto_flush:
+                self.send()
         except Exception:
             self.handleError(record)
 
