@@ -2,7 +2,7 @@
 Simple `logging` handler and formatter for sending larger logs to discord channels.
 
 ## Installation
-Package can be installed via pip
+Package can be installed via pip.
 
 `pip install discord-webhook-logging`
 
@@ -18,7 +18,7 @@ logger.addHandler(handler)
 ```
 
 ## Examples
-Here are some basic examples to demonstrate how this package works
+Here are some basic examples to demonstrate how this package works.
 
 ### Example of all log levels
 #### Python:
@@ -39,7 +39,9 @@ logger.critical('This is critical message')
 </pre>
 
 ### Flushing buffered messages
-DiscordWebhookHandler by default buffers messages, so it can send more lines as single messasge. You can manualy flush the buffer by calling `logger.flush()`. 
+DiscordWebhookHandler by default buffers messages, so it can send more lines as single messasge. Buffer can store 1989 due to Discords message length limits. It is automatically flushed when there is not enogh space for next message. You can also manualy flush the buffer by calling `logger.flush()`.
+
+Buffer is also automatically flushed right before the app exits.
 
 #### Python:
 ```python
@@ -57,7 +59,7 @@ logger.critical('This is critical message')
 ```
 #### Discord:
 
-You will see two messages in Discord
+You will see two messages in Discord insted of one like in example above.
 <pre style="background-color: #2f3136">
 <span style="color:rgb(79, 84, 92)">===│This is debug message</span>
 <span style="color:rgb(133, 153, 0)">+  │This is info message</span>
@@ -98,13 +100,14 @@ If single log string contains multiple lines, it is highlighted with "├" chara
 
 #### Python:
 ```python
-logger.error('1st line\nnext line\nlast line')
+logger.error('1st line\nnext line\n3rd line\nlast line')
 ```
 
 #### Discord:
 <pre style="background-color: #2f3136">
 <span style="color:rgb(220, 50, 47)">-  │1st line
 -  ├next line
+-  ├3rd line
 -  └last line</span>
 </pre>
 
