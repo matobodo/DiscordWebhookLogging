@@ -126,5 +126,5 @@ logger.info('0'*2000 + '1'*50)
 </pre>
 And in the next message remaining text from the same log line
 <pre style="background-color: #2f3136">
-<span style="color:rgb(133, 153, 0)">+  ↳0000000000011111111111111111111111111111111111111111111111111</span>
+<span style="color:rgb(133, 153, 0)">+  ↳00000000000000011111111111111111111111111111111111111111111111111</span>
 </pre>
