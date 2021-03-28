@@ -31,11 +31,11 @@ logger.critical('This is critical message')
 ```
 #### Discord:
 <pre style="background-color: #2f3136">
-<span style="color:rgb(79, 84, 92)">===│This is debug message</span>
-<span style="color:rgb(133, 153, 0)">+  │This is info message</span>
-<span style="color:rgb(185, 187, 190)">W  │This is warning message</span>
-<span style="color:rgb(220, 50, 47)">-  │This is error message</span>
-<span style="color:rgb(220, 50, 47)">-!!│This is critical message</span>
+<span style="color:rgb(79, 84, 92)">===&boxv;This is debug message</span>
+<span style="color:rgb(133, 153, 0)">+  &boxv;This is info message</span>
+<span style="color:rgb(185, 187, 190)">W  &boxv;This is warning message</span>
+<span style="color:rgb(220, 50, 47)">-  &boxv;This is error message</span>
+<span style="color:rgb(220, 50, 47)">-!!&boxv;This is critical message</span>
 </pre>
 
 ### Flushing buffered messages
@@ -61,13 +61,13 @@ logger.critical('This is critical message')
 
 You will see two messages in Discord insted of one like in example above.
 <pre style="background-color: #2f3136">
-<span style="color:rgb(79, 84, 92)">===│This is debug message</span>
-<span style="color:rgb(133, 153, 0)">+  │This is info message</span>
+<span style="color:rgb(79, 84, 92)">===&boxv;This is debug message</span>
+<span style="color:rgb(133, 153, 0)">+  &boxv;This is info message</span>
 </pre>
 <pre style="background-color: #2f3136">
-<span style="color:rgb(185, 187, 190)">W  │This is warning message</span>
-<span style="color:rgb(220, 50, 47)">-  │This is error message</span>
-<span style="color:rgb(220, 50, 47)">-!!│This is critical message</span>
+<span style="color:rgb(185, 187, 190)">W  &boxv;This is warning message</span>
+<span style="color:rgb(220, 50, 47)">-  &boxv;This is error message</span>
+<span style="color:rgb(220, 50, 47)">-!!&boxv;This is critical message</span>
 </pre>
 
 If you want, you can set to flush buffer automatically after every message. However, I do not recommend doing it, due to Discords API rate limits.
@@ -85,18 +85,18 @@ logger.warning('This is warning message')
 ```
 #### Discord:
 <pre style="background-color: #2f3136">
-<span style="color:rgb(79, 84, 92)">===│This is debug message</span>
+<span style="color:rgb(79, 84, 92)">===&boxv;This is debug message</span>
 </pre>
 <pre style="background-color: #2f3136">
-<span style="color:rgb(133, 153, 0)">+  │This is info message</span>
+<span style="color:rgb(133, 153, 0)">+  &boxv;This is info message</span>
 </pre>
 <pre style="background-color: #2f3136">
-<span style="color:rgb(185, 187, 190)">W  │This is warning message</span>
+<span style="color:rgb(185, 187, 190)">W  &boxv;This is warning message</span>
 </pre>
 
 
 ### Multi line log
-If single log string contains multiple lines, it is highlighted with "├" character from 2nd line and last line is highlighted with "└"
+If single log string contains multiple lines, it is highlighted with "&boxvr;" character from 2nd line and last line is highlighted with "&boxur;"
 
 #### Python:
 ```python
@@ -105,15 +105,15 @@ logger.error('1st line\nnext line\n3rd line\nlast line')
 
 #### Discord:
 <pre style="background-color: #2f3136">
-<span style="color:rgb(220, 50, 47)">-  │1st line
--  ├next line
--  ├3rd line
--  └last line</span>
+<span style="color:rgb(220, 50, 47)">-  &boxv;1st line
+-  &boxvr;next line
+-  &boxvr;3rd line
+-  &boxur;last line</span>
 </pre>
 
 ### Long messages
 Discord supports sending messages up to 2000 characters. If longer string is passed into logger, DiscordWebhookFormatter automatically splits message into shorter parts to fit discords 2000 character limt.
-If the line was split, it is highlighted with "↳" character.
+If the line was split, it is highlighted with "&rdsh;" character.
 
 #### Python:
 ```python
@@ -122,9 +122,9 @@ logger.info('0'*2000 + '1'*50)
 
 #### Discord:
 <pre style="background-color: #2f3136">
-<span style="color:rgb(133, 153, 0)">+  │000000000000000000000000000 ... zeroes contiues up to message length limit</span>
+<span style="color:rgb(133, 153, 0)">+  &boxv;000000000000000000000000000 ... zeroes contiues up to message length limit</span>
 </pre>
 And in the next message remaining text from the same log line
 <pre style="background-color: #2f3136">
-<span style="color:rgb(133, 153, 0)">+  ↳00000000000000011111111111111111111111111111111111111111111111111</span>
+<span style="color:rgb(133, 153, 0)">+  &rdsh;00000000000000011111111111111111111111111111111111111111111111111</span>
 </pre>
