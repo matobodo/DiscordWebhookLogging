@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='discord-webhook-logging',
-    version='0.0.2',
+    version='0.0.3',
     description='Simple Discord webhook logger',
     py_modules=['discord_webhook_logging'],
     package_dir={'': 'src'},
